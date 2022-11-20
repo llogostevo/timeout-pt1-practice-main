@@ -16,11 +16,31 @@ intervalCount(function() {
 }, 500, 3); // prints 'hi' at 500ms intervals a total of 3 times
 ***********************************************************************/
 
+
+// NOT REALLY SURE HOW TO DO THIS< I NEED TO COUNT HOW MANY TIMES THE CALL BACK IS RUN
+// PERHAPS I COULD DO A COUNTER IN THE UPPER FUNCTION AND THEN RETURN A CALLBACK FUNCTION THAT CARRIES OUT THE CALLBACK???
+// I NEED SOMEWAY OF COUTING THE INTERVALS AND SEEING IF IT MATCHES THE AMOUNT WHEN IT DOES THAT IS WHEN I AM CALLING THE CLEAR INTERVAL
+
 function intervalCount(cb, delay, amount) {
-  // Your code here
-}
+let count = 0;
+  
+function counter(){
+    if (count==amount){
+      return clearInterval(intervalID);
+    } else {
+      count = count+1;
+      cb();
+      return counter();
+    }
+  }
+
+  const intervalID = setInterval(counter, delay);
+
+};
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
+
+
 try {
   module.exports = intervalCount;
 } catch {
